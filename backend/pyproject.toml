@@ -1,0 +1,33 @@
+[project]
+name = "connections-solver-backend"
+version = "0.1.0"
+description = "NYT Connections solver using fastText word embeddings"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "gensim>=4.3",
+    "numpy>=1.26,<2.0",
+    "httpx>=0.27",
+    "pydantic>=2.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.6",
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+markers = [
+    "slow: tests that load the fastText model (~70s); run with --run-slow",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["main", "embeddings", "solver", "nyt_client"]
